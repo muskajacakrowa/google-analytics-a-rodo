@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Google Analytics a RODO – jak legalnie mierzyć ruch na stronie</title>
+<meta name="description" content="Google Analytics a RODO w praktyce: kiedy potrzebna jest zgoda na cookies Google Analytics, jak działa Consent Mode v2, co wpisać w politykę prywatności i jak skonfigurować GA4 krok po kroku.">
+<meta name="keywords" content="Google Analytics a RODO, zgoda na cookies Google Analytics, Consent Mode, GA4 RODO, baner cookies, polityka prywatności">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Autor projektu">
+<link rel="canonical" href="https://muskajacakrowa.github.io/google-analytics-a-rodo/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Google Analytics a RODO – jak legalnie mierzyć ruch na stronie">
+<meta property="og:description" content="Zgoda na cookies Google Analytics, Consent Mode v2 i konfiguracja GA4 zgodna z RODO – praktyczny poradnik krok po kroku.">
+<meta property="og:url" content="https://muskajacakrowa.github.io/google-analytics-a-rodo/">
+<meta property="og:image" content="https://muskajacakrowa.github.io/google-analytics-a-rodo/img/google-analytics-a-rodo-statystyki-strony.jpg">
+<meta property="article:section" content="Analityka internetowa">
+<meta property="article:tag" content="Google Analytics">
+<meta property="article:tag" content="RODO">
+<meta property="article:tag" content="cookies">
+<meta property="article:tag" content="Consent Mode">
+<meta property="article:tag" content="GA4">
+<meta property="article:tag" content="polityka prywatności">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Google Analytics a RODO – jak legalnie mierzyć ruch na stronie",
+  "description": "Kiedy potrzebna jest zgoda na cookies Google Analytics, jak działa Consent Mode v2 i jak skonfigurować GA4 zgodnie z RODO.",
+  "image": "https://muskajacakrowa.github.io/google-analytics-a-rodo/img/google-analytics-a-rodo-statystyki-strony.jpg",
+  "datePublished": "2026-11-15",
+  "dateModified": "2026-11-15",
+  "inLanguage": "pl-PL",
+  "articleSection": "Analityka internetowa",
+  "keywords": "Google Analytics a RODO, zgoda na cookies Google Analytics, Consent Mode, GA4, polityka prywatności",
+  "mainEntityOfPage": "https://muskajacakrowa.github.io/google-analytics-a-rodo/"
+}
+</script>
+<style>
+:root{--text:#1f2328;--muted:#59636e;--accent:#0b57d0;--bg:#fff;--soft:#f3f6fb;--border:#d8dee4}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:18px;line-height:1.7;color:var(--text);background:var(--bg)}
+a{color:var(--accent)}
+.site-header,.site-footer{background:var(--soft);border-bottom:1px solid var(--border)}
+.site-footer{border-top:1px solid var(--border);border-bottom:0;margin-top:48px;font-size:15px;color:var(--muted)}
+.wrap{max-width:780px;margin:0 auto;padding:0 20px}
+.site-header .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px}
+.logo{font-weight:700;text-decoration:none;color:var(--text)}
+nav a{margin-right:16px;font-size:15px;text-decoration:none}
+.breadcrumbs{font-size:14px;color:var(--muted);margin:24px 0 0}
+h1{font-size:2.1rem;line-height:1.25;margin:12px 0 8px}
+h2{font-size:1.55rem;line-height:1.3;margin:44px 0 12px;padding-top:8px;border-top:1px solid var(--border)}
+h3{font-size:1.2rem;margin:28px 0 8px}
+.meta{font-size:15px;color:var(--muted);margin-bottom:24px}
+.lead{font-size:1.12rem}
+figure{margin:28px 0}
+figure img{width:100%;height:auto;border-radius:8px;display:block}
+figcaption{font-size:14px;color:var(--muted);margin-top:6px}
+.toc{background:var(--soft);border:1px solid var(--border);border-radius:8px;padding:16px 22px;margin:24px 0}
+.toc ol{margin:6px 0 0;padding-left:22px}
+.box{background:var(--soft);border-left:4px solid var(--accent);padding:14px 18px;margin:24px 0;border-radius:0 8px 8px 0}
+pre{background:#0d1117;color:#e6edf3;padding:16px;border-radius:8px;overflow-x:auto;font-size:14px;line-height:1.5}
+code{font-family:Consolas,"Courier New",monospace}
+table{border-collapse:collapse;width:100%;font-size:16px;margin:20px 0}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:8px 0 0}
+.tags a{display:inline-block;padding:4px 12px;border:1px solid var(--border);border-radius:999px;font-size:14px;text-decoration:none;background:var(--soft)}
+.taxonomy{margin-top:40px;padding-top:16px;border-top:1px solid var(--border);font-size:16px}
+@media (max-width:600px){body{font-size:17px}h1{font-size:1.7rem}h2{font-size:1.35rem}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="./">Analityka bez tajemnic</a>
+    <nav aria-label="Kategorie">
+      <a href="kategoria/analityka-internetowa/">Analityka internetowa</a>
+      <a href="kategoria/analityka-internetowa/#rodo-i-prywatnosc">RODO i prywatność</a>
+      <a href="tagi/">Tagi</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+<article>
+
+<p class="breadcrumbs"><a href="./">Strona główna</a> › <a href="kategoria/analityka-internetowa/">Analityka internetowa</a> › <a href="kategoria/analityka-internetowa/#rodo-i-prywatnosc">RODO i prywatność</a></p>
+
+<h1>Google Analytics a RODO – jak legalnie mierzyć ruch na stronie</h1>
+<p class="meta">Opublikowano: <time datetime="2026-11-15">15 listopada 2026</time> · Kategoria: <a href="kategoria/analityka-internetowa/" rel="category">Analityka internetowa</a> · Czas czytania: ok. 12 minut</p>
+
+<p class="lead">Statystyki odwiedzin to podstawa każdej strony, która ma na siebie zarabiać. Bez nich nie wiadomo, skąd przychodzą użytkownicy, które treści czytają i dlaczego opuszczają witrynę. Problem w tym, że najpopularniejsze narzędzie analityczne na świecie przetwarza dane, które mogą być danymi osobowymi. Temat <strong>Google Analytics a RODO</strong> wraca więc w każdej firmie, która uruchamia nową stronę albo dostaje pierwsze pytanie od klienta o politykę prywatności.</p>
+
+<p>W tym poradniku wyjaśniam, kiedy potrzebna jest <strong>zgoda na cookies Google Analytics</strong>, jak działa <strong>Consent Mode v2</strong>, co trzeba napisać w polityce prywatności i jak krok po kroku skonfigurować Google Analytics 4, żeby mierzyć ruch bez ryzyka dla siebie i użytkowników.</p>
+
+<nav class="toc" aria-label="Spis treści">
+  <strong>Spis treści</strong>
+  <ol>
+    <li><a href="#dlaczego-rodo">Dlaczego Google Analytics podlega RODO?</a></li>
+    <li><a href="#podstawa-prawna">Podstawa prawna – co mówią przepisy</a></li>
+    <li><a href="#zgoda-na-cookies">Zgoda na cookies Google Analytics – jak ją poprawnie zebrać</a></li>
+    <li><a href="#consent-mode">Consent Mode v2 – analityka z poszanowaniem decyzji użytkownika</a></li>
+    <li><a href="#transfer-usa">Przekazywanie danych do USA</a></li>
+    <li><a href="#obowiazki-informacyjne">Obowiązki informacyjne i polityka prywatności</a></li>
+    <li><a href="#konfiguracja-ga4">Konfiguracja GA4 zgodna z RODO – krok po kroku</a></li>
+    <li><a href="#checklista">Checklista zgodności</a></li>
+    <li><a href="#faq">Najczęściej zadawane pytania</a></li>
+  </ol>
+</nav>
+
+<h2 id="dlaczego-rodo">Dlaczego Google Analytics podlega RODO?</h2>
+
+<p>RODO chroni dane osobowe, czyli wszelkie informacje o zidentyfikowanej lub możliwej do zidentyfikowania osobie fizycznej. Kluczowe jest słowo „możliwej”. Nie trzeba znać imienia i nazwiska odwiedzającego, żeby przetwarzać jego dane osobowe. Wystarczy identyfikator, który pozwala odróżnić jedną osobę od innych i powiązać jej kolejne wizyty.</p>
+
+<p>Google Analytics działa właśnie w ten sposób. Przy pierwszej wizycie zapisuje w przeglądarce plik cookie z losowym identyfikatorem klienta. Przy kolejnych wizytach ten sam identyfikator pozwala rozpoznać, że wróciła ta sama przeglądarka. Do tego dochodzą informacje o urządzeniu, systemie, przybliżonej lokalizacji i ścieżce poruszania się po stronie. Każda z tych informacji osobno wydaje się niewinna, ale razem tworzą profil, który w określonych sytuacjach da się przypisać do konkretnego człowieka.</p>
+
+<figure>
+  <img src="img/google-analytics-a-rodo-statystyki-strony.jpg" width="1200" height="795" fetchpriority="high"
+       alt="Laptop z otwartym panelem Google Analytics pokazującym statystyki ruchu na stronie – Google Analytics a RODO"
+       title="Google Analytics a RODO – raporty statystyk strony">
+  <figcaption>Raporty Google Analytics wyglądają na anonimowe, ale u ich podstaw leżą identyfikatory zapisane w cookies. Zdjęcie: Lukas Blazek / Pexels.</figcaption>
+</figure>
+
+<h3>Jakie dane zbiera Google Analytics 4</h3>
+
+<p>W domyślnej konfiguracji GA4 przetwarza między innymi:</p>
+<ul>
+  <li><strong>identyfikator klienta</strong> zapisany w cookie <code>_ga</code>,</li>
+  <li>adres strony, tytuł podstrony i źródło wejścia (np. wyszukiwarka, kampania, link z innej witryny),</li>
+  <li>typ urządzenia, system operacyjny, przeglądarkę i rozdzielczość ekranu,</li>
+  <li>przybliżoną lokalizację wyznaczaną na podstawie adresu IP,</li>
+  <li>zdarzenia, czyli kliknięcia, przewinięcia strony, pobrania plików czy wysłanie formularza.</li>
+</ul>
+
+<p>Ważna zmiana w porównaniu ze starszym Universal Analytics: GA4 <strong>nie zapisuje i nie przechowuje adresów IP</strong> użytkowników z Unii Europejskiej. Adres jest wykorzystywany tylko chwilowo do ustalenia lokalizacji, a potem odrzucany. To dobra wiadomość, ale nie zwalnia z obowiązków, bo sam identyfikator w cookie nadal jest daną osobową w rozumieniu RODO.</p>
+
+<h3>Cookies a dane osobowe – dwa różne reżimy prawne</h3>
+
+<p>Wiele osób myli dwie kwestie, które warto rozdzielić. Pierwsza to <strong>zapisywanie i odczytywanie informacji na urządzeniu użytkownika</strong>, czyli właśnie cookies. Tę kwestię regulują przepisy krajowe wdrażające dyrektywę ePrivacy. Druga to <strong>przetwarzanie danych osobowych</strong>, które regulują przepisy RODO. W przypadku Google Analytics mamy do czynienia z obydwoma jednocześnie: narzędzie zapisuje cookie, a potem przetwarza dane powiązane z identyfikatorem z tego cookie. Dlatego zgodność wymaga spełnienia wymagań z obu obszarów.</p>
+
+<h2 id="podstawa-prawna">Podstawa prawna – co mówią przepisy</h2>
+
+<h3>RODO – zgoda jako podstawa przetwarzania</h3>
+
+<p>Art. 6 RODO wymienia sześć podstaw prawnych przetwarzania danych. W teorii można rozważać prawnie uzasadniony interes administratora, ale w praktyce europejskie organy nadzorcze są zgodne: analityka oparta na cookies, które nie są niezbędne do działania strony, wymaga <strong>zgody użytkownika</strong>, czyli podstawy z art. 6 ust. 1 lit. a RODO. Pełny tekst rozporządzenia jest dostępny w serwisie <a href="https://eur-lex.europa.eu/legal-content/PL/TXT/?uri=CELEX:32016R0679" target="_blank" rel="noopener">EUR-Lex</a>.</p>
+
+<p>RODO wprowadza też <strong>zasadę rozliczalności</strong>. Administrator musi nie tylko przestrzegać przepisów, ale też umieć to wykazać. W praktyce oznacza to, że narzędzie do zbierania zgód powinno zapisywać, kto, kiedy i na co się zgodził.</p>
+
+<h3>Prawo komunikacji elektronicznej zamiast Prawa telekomunikacyjnego</h3>
+
+<p>Starsze poradniki powołują się na art. 173 Prawa telekomunikacyjnego. Ta ustawa przestała obowiązywać 10 listopada 2024 roku. Jej miejsce zajęło <strong>Prawo komunikacji elektronicznej</strong>, a przepis o cookies znajduje się obecnie w art. 399 tej ustawy. Sens regulacji się nie zmienił: zapisywanie informacji na urządzeniu użytkownika i dostęp do nich są dozwolone po uzyskaniu zgody i przekazaniu jasnej informacji o celu. Bez zgody można używać wyłącznie cookies niezbędnych do świadczenia usługi, na przykład cookie koszyka zakupowego czy cookie zapamiętującego decyzję o zgodzie.</p>
+
+<h3>Ustawa o świadczeniu usług drogą elektroniczną</h3>
+
+<p>Trzecim aktem jest ustawa o świadczeniu usług drogą elektroniczną. Jej art. 18 ust. 4 stanowi, że badanie zachowań i preferencji użytkowników, które nie jest niezbędne do świadczenia usługi, wymaga zgody. To kolejny argument za tym, że <strong>Google Analytics a RODO</strong> to temat, w którym zgoda jest punktem wyjścia, a nie dodatkiem.</p>
+
+<div class="box"><strong>W skrócie:</strong> trzy niezależne przepisy prowadzą do tego samego wniosku. Pełna analityka z cookies Google Analytics wymaga uprzedniej, dobrowolnej i świadomej zgody użytkownika.</div>
+
+<h2 id="zgoda-na-cookies">Zgoda na cookies Google Analytics – jak ją poprawnie zebrać</h2>
+
+<p>Sama obecność banera cookies nie oznacza jeszcze zgodności z prawem. Liczy się to, jak baner działa i co dzieje się w kodzie strony przed kliknięciem przez użytkownika.</p>
+
+<figure>
+  <img src="img/zgoda-na-cookies-google-analytics.jpg" width="1200" height="798" loading="lazy"
+       alt="Pachołek ostrzegawczy na klawiaturze laptopa – symbol ostrożności przy zbieraniu zgody na cookies Google Analytics"
+       title="Zgoda na cookies Google Analytics – na co uważać">
+  <figcaption>Najczęstszy błąd: skrypt analityczny uruchamia się, zanim użytkownik podejmie decyzję. Zdjęcie: Fernando Arcos / Pexels.</figcaption>
+</figure>
+
+<h3>Cechy ważnej zgody</h3>
+
+<p>Zgodnie z art. 4 pkt 11 i art. 7 RODO zgoda musi być:</p>
+<ul>
+  <li><strong>dobrowolna</strong> – odmowa nie może blokować podstawowego korzystania ze strony,</li>
+  <li><strong>konkretna</strong> – dotyczy określonego celu, np. statystyk, a nie „wszystkiego naraz”,</li>
+  <li><strong>świadoma</strong> – przed kliknięciem użytkownik wie, kto jest administratorem i w jakim celu przetwarza dane,</li>
+  <li><strong>jednoznaczna</strong> – wyrażona aktywnym działaniem, np. kliknięciem przycisku,</li>
+  <li><strong>odwołalna</strong> – wycofanie zgody musi być tak samo łatwe jak jej udzielenie.</li>
+</ul>
+
+<p>Trybunał Sprawiedliwości UE w wyroku w sprawie Planet49 (<a href="https://curia.europa.eu/juris/liste.jsf?num=C-673/17&amp;language=PL" target="_blank" rel="noopener">C-673/17</a>) potwierdził, że domyślnie zaznaczone pole wyboru nie jest ważną zgodą, i to niezależnie od tego, czy cookies zawierają dane osobowe.</p>
+
+<h3>Najczęstsze błędy w banerach cookies</h3>
+
+<table>
+  <thead>
+    <tr><th>Błąd</th><th>Dlaczego to problem</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Kod Google Analytics ładuje się od razu po wejściu na stronę</td><td>Cookies są zapisywane przed udzieleniem zgody, więc zgoda zebrana później niczego nie legalizuje.</td></tr>
+    <tr><td>Tylko przycisk „Akceptuję”, bez „Odrzuć”</td><td>Brak realnego wyboru oznacza, że zgoda nie jest dobrowolna.</td></tr>
+    <tr><td>„Odrzuć” ukryte w ustawieniach, a „Akceptuję” duże i kolorowe</td><td>Tak zwane dark patterns są coraz częściej kwestionowane przez organy nadzorcze.</td></tr>
+    <tr><td>Zgoda przez przewinięcie strony lub dalsze przeglądanie</td><td>Milczenie i bierność nie są zgodą (motyw 32 RODO).</td></tr>
+    <tr><td>Brak możliwości zmiany decyzji</td><td>Użytkownik musi móc łatwo wycofać zgodę w dowolnym momencie.</td></tr>
+  </tbody>
+</table>
+
+<h3>Jedna zgoda czy kilka?</h3>
+
+<p>Nie trzeba pytać o każde cookie osobno. Wszystkie cookies Google Analytics służą jednemu celowi, czyli statystykom, więc można je objąć jedną zgodą w kategorii „analityczne”. Inaczej wygląda sytuacja, gdy na stronie działają także narzędzia reklamowe, na przykład Google Ads, piksel Meta czy remarketing. Reklama to inny cel przetwarzania, więc wymaga <strong>osobnej zgody</strong>. Dobrze zaprojektowany baner ma zwykle trzy lub cztery kategorie: niezbędne (zawsze aktywne), analityczne, marketingowe i ewentualnie funkcjonalne.</p>
+
+<h2 id="consent-mode">Consent Mode v2 – analityka z poszanowaniem decyzji użytkownika</h2>
+
+<p>Klasyczne podejście jest proste: brak zgody oznacza brak skryptu Google Analytics na stronie. Wadą jest utrata danych, bo zgodę na cookies wyraża zwykle tylko część odwiedzających. Odpowiedzią Google jest <strong>Consent Mode</strong>, czyli tryb uzyskiwania zgody. Od marca 2024 roku jego wersja v2 jest wymagana przez Google dla serwisów, które kierują ruch z Europejskiego Obszaru Gospodarczego i korzystają z usług reklamowych Google.</p>
+
+<h3>Tryb podstawowy i zaawansowany</h3>
+
+<p><strong>Tryb podstawowy</strong> działa jak klasyczne wdrożenie: tagi Google nie ładują się, dopóki użytkownik nie wyrazi zgody. Jeśli odmówi, do Google nie trafia żadna informacja.</p>
+
+<p><strong>Tryb zaawansowany</strong> ładuje tagi od razu, ale przy braku zgody wysyła tylko tzw. pingi bez cookies, bez identyfikatora klienta. Na tej podstawie Google szacuje brakujące dane za pomocą modelowania. Ten tryb daje pełniejsze raporty, ale budzi więcej wątpliwości prawnych, bo pewne informacje techniczne trafiają do Google jeszcze przed decyzją użytkownika. Przy ostrożnym podejściu do RODO bezpieczniejszy jest tryb podstawowy.</p>
+
+<h3>Cztery sygnały zgody</h3>
+
+<p>Consent Mode v2 posługuje się czterema parametrami:</p>
+<ul>
+  <li><code>analytics_storage</code> – zgoda na cookies analityczne,</li>
+  <li><code>ad_storage</code> – zgoda na cookies reklamowe,</li>
+  <li><code>ad_user_data</code> – zgoda na przesyłanie danych użytkownika do Google w celach reklamowych,</li>
+  <li><code>ad_personalization</code> – zgoda na reklamy spersonalizowane i remarketing.</li>
+</ul>
+
+<p>Domyślnie wszystkie powinny mieć wartość <code>denied</code>. Dopiero kliknięcie zgody przez użytkownika zmienia odpowiednie parametry na <code>granted</code>. Przykładowy fragment kodu wygląda tak:</p>
+
+<pre><code>&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  // stan domyślny – przed decyzją użytkownika
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied',
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied'
+  });
+
+  // wywoływane po kliknięciu „Akceptuję statystyki”
+  function onAnalyticsConsent() {
+    gtag('consent', 'update', { 'analytics_storage': 'granted' });
+  }
+&lt;/script&gt;</code></pre>
+
+<p>Pełny opis parametrów znajdziesz w <a href="https://developers.google.com/tag-platform/security/guides/consent" target="_blank" rel="noopener">dokumentacji Google dla deweloperów</a>. W praktyce większość serwisów nie pisze tego kodu ręcznie, tylko korzysta z platformy CMP (Consent Management Platform) albo wtyczki do WordPressa z certyfikatem Google, która sama ustawia te sygnały.</p>
+
+<h2 id="transfer-usa">Przekazywanie danych do USA</h2>
+
+<p>Google przetwarza dane z Google Analytics również na serwerach w Stanach Zjednoczonych. Z punktu widzenia RODO to przekazanie danych do państwa trzeciego, które wymaga odpowiedniej podstawy.</p>
+
+<p>Historia jest burzliwa. W lipcu 2020 roku TSUE unieważnił Tarczę Prywatności UE–USA (wyrok Schrems II). W 2022 roku organy ochrony danych w Austrii, Francji i Włoszech uznały konkretne wdrożenia Google Analytics za niezgodne z RODO właśnie z powodu transferu danych do USA. Sytuację ustabilizowała dopiero decyzja Komisji Europejskiej z 10 lipca 2023 roku o odpowiednim stopniu ochrony w ramach <strong>EU-US Data Privacy Framework</strong>. Google jest uczestnikiem tego programu, co można sprawdzić na liście na stronie <a href="https://www.dataprivacyframework.gov/" target="_blank" rel="noopener">Data Privacy Framework</a>.</p>
+
+<p>Dla właściciela strony oznacza to dwie rzeczy. Po pierwsze, w polityce prywatności trzeba poinformować o przekazywaniu danych do USA i wskazać podstawę tego transferu. Po drugie, warto śledzić sytuację, bo nowa decyzja również może zostać zaskarżona.</p>
+
+<h2 id="obowiazki-informacyjne">Obowiązki informacyjne i polityka prywatności</h2>
+
+<p>Art. 13 RODO określa, co trzeba przekazać osobie, której dane się przetwarza. Część informacji musi być widoczna już w banerze, przed udzieleniem zgody, a resztę można umieścić w polityce prywatności i cookies, do której link powinien być stale dostępny, najczęściej w stopce strony.</p>
+
+<p><strong>W banerze cookies, przed zgodą:</strong></p>
+<ul>
+  <li>kto jest administratorem danych (właściciel strony, a w przypadku GA także Google),</li>
+  <li>w jakim celu używane są cookies, np. „do prowadzenia statystyk odwiedzin”,</li>
+  <li>informacja o możliwości odmowy i zmiany decyzji,</li>
+  <li>link do polityki prywatności.</li>
+</ul>
+
+<p><strong>W polityce prywatności i cookies:</strong></p>
+<ol>
+  <li>pełne dane i kontakt do administratora, a jeśli został powołany – inspektora ochrony danych,</li>
+  <li>cel i podstawa prawna przetwarzania (art. 6 ust. 1 lit. a RODO),</li>
+  <li>dane drugiego podmiotu: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irlandia,</li>
+  <li>odbiorcy danych, np. agencja marketingowa z dostępem do konta GA,</li>
+  <li>informacja o przekazaniu danych do USA i jego podstawie,</li>
+  <li>okres przechowywania danych w GA oraz czas życia cookies (cookie <code>_ga</code> wygasa po 2 latach),</li>
+  <li>prawa użytkownika: dostęp, sprostowanie, usunięcie, ograniczenie, sprzeciw, przenoszenie danych i skarga do <a href="https://uodo.gov.pl/" target="_blank" rel="noopener">Prezesa UODO</a>,</li>
+  <li>informacja o prawie do wycofania zgody i o tym, jak to zrobić,</li>
+  <li>informacja, że zgoda jest dobrowolna, a strona działa również bez niej,</li>
+  <li>informacja o profilowaniu lub jego braku,</li>
+  <li>informacja, że cookies można zablokować lub usunąć w ustawieniach przeglądarki.</li>
+</ol>
+
+<p>Listę podmiotów przetwarzających dane na zlecenie Google, wraz z ich lokalizacją, Google publikuje na stronie <a href="https://business.safety.google/subprocessors/" target="_blank" rel="noopener">Google Business Data Responsibility</a>. Warto podlinkować ją w polityce prywatności.</p>
+
+<h2 id="konfiguracja-ga4">Konfiguracja GA4 zgodna z RODO – krok po kroku</h2>
+
+<p>Poniższa procedura zakłada nową usługę Google Analytics 4 i stronę bez wcześniejszej analityki.</p>
+
+<ol>
+  <li><strong>Utwórz konto i usługę GA4.</strong> Zaloguj się na analytics.google.com, utwórz konto, a następnie usługę dla swojej strony i strumień danych typu „Sieć”. Zapisz identyfikator pomiaru w formacie <code>G-XXXXXXXXXX</code>.</li>
+  <li><strong>Zaakceptuj warunki przetwarzania danych.</strong> W sekcji Administracja → Ustawienia konta zaakceptuj Warunki przetwarzania danych w Google Ads (Data Processing Terms) i uzupełnij dane kontaktowe administratora. To odpowiednik umowy powierzenia z Google.</li>
+  <li><strong>Ustaw okres przechowywania danych.</strong> W Administracja → Gromadzenie i modyfikacja danych → Przechowywanie danych wybierz 2 lub 14 miesięcy. Krótszy okres to mniejsze ryzyko, ale też mniej danych do porównań rok do roku.</li>
+  <li><strong>Wyłącz to, czego nie potrzebujesz.</strong> Jeśli nie prowadzisz kampanii remarketingowych, nie włączaj Google Signals ani personalizacji reklam. Mniej zbieranych danych to łatwiejsze obowiązki informacyjne.</li>
+  <li><strong>Wdróż baner zgody z Consent Mode v2.</strong> Wybierz narzędzie CMP lub wtyczkę i ustaw domyślny stan zgód na <code>denied</code>.</li>
+  <li><strong>Dodaj kod śledzenia.</strong> Umieść tag Google w sekcji <code>&lt;head&gt;</code> każdej podstrony albo przez Google Tag Manager – zawsze tak, aby respektował sygnały zgody.</li>
+  <li><strong>Przetestuj działanie.</strong> Otwórz stronę w trybie incognito i sprawdź w narzędziach deweloperskich przeglądarki (zakładka Application → Cookies), czy przed kliknięciem zgody nie pojawia się cookie <code>_ga</code>. Następnie wyraź zgodę i zobacz w raporcie „Czas rzeczywisty” w GA4, czy wizyta została zarejestrowana.</li>
+  <li><strong>Opublikuj politykę prywatności.</strong> Uzupełnij ją o elementy z poprzedniej sekcji i dodaj link w stopce.</li>
+  <li><strong>Ogranicz dostęp do konta.</strong> Nadawaj uprawnienia według zasady minimalnych uprawnień, a z zewnętrznymi firmami mającymi dostęp do danych zawrzyj umowy powierzenia.</li>
+</ol>
+
+<p>Szczegóły dotyczące okresu przechowywania i zakresu zbieranych danych opisuje <a href="https://support.google.com/analytics/answer/7667196?hl=pl" target="_blank" rel="noopener">Centrum pomocy Google Analytics</a>.</p>
+
+<h2 id="checklista">Checklista: czy Twoje Google Analytics jest zgodne z RODO?</h2>
+
+<ul>
+  <li>☐ Skrypt GA nie zapisuje cookies przed udzieleniem zgody.</li>
+  <li>☐ Baner ma równorzędne przyciski „Akceptuję” i „Odrzucam”.</li>
+  <li>☐ Użytkownik może w każdej chwili zmienić decyzję, np. przez link w stopce.</li>
+  <li>☐ Consent Mode v2 jest wdrożony, a stan domyślny to <code>denied</code>.</li>
+  <li>☐ Zgody na statystyki i marketing są oddzielne.</li>
+  <li>☐ Warunki przetwarzania danych w GA są zaakceptowane.</li>
+  <li>☐ Okres przechowywania danych jest ustawiony świadomie.</li>
+  <li>☐ Polityka prywatności zawiera wszystkie wymagane informacje, w tym o transferze do USA.</li>
+  <li>☐ Dostęp do konta GA mają tylko upoważnione osoby.</li>
+  <li>☐ Do GA nie trafiają dane identyfikujące, np. adres e-mail w adresie URL.</li>
+</ul>
+
+<p>Ostatni punkt jest często pomijany. Jeśli formularz przekazuje e-mail w parametrze adresu, na przykład <code>?email=jan@firma.pl</code>, to taki adres trafi do raportów Google Analytics. Jest to naruszenie zarówno RODO, jak i warunków korzystania z usługi Google.</p>
+
+<h2 id="faq">Najczęściej zadawane pytania</h2>
+
+<h3>Czy mała strona firmowa też potrzebuje zgody na cookies Google Analytics?</h3>
+<p>Tak. Przepisy nie zależą od wielkości firmy ani liczby odwiedzin. Jeśli na stronie działa Google Analytics z cookies, zgoda jest potrzebna tak samo w małym blogu, jak w dużym sklepie.</p>
+
+<h3>Czy mogę zablokować dostęp do strony, dopóki ktoś nie wyrazi zgody?</h3>
+<p>Możesz wymusić podjęcie decyzji, ale nie samą zgodę. Baner zasłaniający treść jest dopuszczalny, jeśli przycisk odmowy jest równie łatwo dostępny jak przycisk akceptacji, a polityka prywatności da się otworzyć przed podjęciem decyzji.</p>
+
+<h3>Czy anonimizacja IP wystarczy, żeby nie pytać o zgodę?</h3>
+<p>Nie. GA4 i tak nie przechowuje adresów IP z UE, ale nadal zapisuje cookie z identyfikatorem klienta. Właśnie zapis tego cookie wymaga zgody.</p>
+
+<h3>Czy są alternatywy dla Google Analytics bez cookies?</h3>
+<p>Tak. Narzędzia takie jak Matomo w trybie bez cookies, Plausible czy statystyki z logów serwera mogą działać bez zapisywania informacji na urządzeniu użytkownika. Oferują jednak mniej funkcji i nadal wymagają rzetelnej informacji w polityce prywatności.</p>
+
+<h2 id="podsumowanie">Podsumowanie</h2>
+
+<p>Relacja <strong>Google Analytics a RODO</strong> nie musi być konfliktem. Narzędzie można stosować legalnie, jeśli spełni się cztery warunki: skrypt uruchamia się dopiero po zgodzie, użytkownik ma realny wybór i możliwość zmiany decyzji, polityka prywatności rzetelnie opisuje przetwarzanie, a konto GA4 jest skonfigurowane z myślą o minimalizacji danych. <strong>Consent Mode v2</strong> pomaga pogodzić te wymagania z potrzebą posiadania wiarygodnych statystyk. Zgodność z przepisami jest też argumentem wizerunkowym, bo pokazuje użytkownikom, że ich prywatność jest traktowana poważnie.</p>
+
+<p class="box"><strong>Zastrzeżenie:</strong> artykuł ma charakter informacyjny i edukacyjny, opisuje stan prawny na listopad 2026 roku i nie stanowi porady prawnej. Przy wdrożeniach w większych organizacjach warto skonsultować się z inspektorem ochrony danych lub prawnikiem.</p>
+
+<section class="taxonomy" aria-label="Kategorie i tagi">
+  <p><strong>Kategoria:</strong> <a href="kategoria/analityka-internetowa/" rel="category">Analityka internetowa</a> › <a href="kategoria/analityka-internetowa/#rodo-i-prywatnosc" rel="category">RODO i prywatność</a></p>
+  <p><strong>Tagi:</strong></p>
+  <ul class="tags">
+    <li><a href="tagi/#google-analytics" rel="tag">Google Analytics</a></li>
+    <li><a href="tagi/#ga4" rel="tag">GA4</a></li>
+    <li><a href="tagi/#rodo" rel="tag">RODO</a></li>
+    <li><a href="tagi/#cookies" rel="tag">cookies</a></li>
+    <li><a href="tagi/#consent-mode" rel="tag">Consent Mode</a></li>
+    <li><a href="tagi/#polityka-prywatnosci" rel="tag">polityka prywatności</a></li>
+    <li><a href="tagi/#baner-cookies" rel="tag">baner cookies</a></li>
+  </ul>
+</section>
+
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Projekt zaliczeniowy z przedmiotu Analityka internetowa. Ta strona nie używa plików cookies ani narzędzi analitycznych. · <a href="sitemap.xml">Mapa strony</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
